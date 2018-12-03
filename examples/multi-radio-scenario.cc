@@ -42,9 +42,10 @@
 //
 
 #include "ns3/core-module.h"
-#include "ns3/common-module.h"
-#include "ns3/node-module.h"
-#include "ns3/helper-module.h"
+// #include "ns3/common-module.h"
+// #include "ns3/node-module.h"
+#include "ns3/network-module.h"     // common-module and node-module merged into network-module [ns-3.11]
+// #include "ns3/helper-module.h"   // helper-module was removed [ns-3.11]
 #include "ns3/mobility-module.h"
 #include "ns3/contrib-module.h"
 #include "ns3/wifi-module.h"
