@@ -44,14 +44,16 @@
 #include "ns3/core-module.h"
 // #include "ns3/common-module.h"
 // #include "ns3/node-module.h"
-#include "ns3/network-module.h"     // common-module and node-module merged into network-module [ns-3.11]
+#include "ns3/network-module.h"     // common-module and node-module were merged into network-module [ns-3.11]
 // #include "ns3/helper-module.h"   // helper-module was removed [ns-3.11]
 #include "ns3/mobility-module.h"
-#include "ns3/contrib-module.h"
+// #include "ns3/contrib-module.h"
+#include "ns3/config-store-module.h"  // contrib-module was changed to ns3/config-store-module.h [ns-3.11]
 #include "ns3/wifi-module.h"
 #include "ns3/sica.h"
 #include "ns3/sica-helper.h"
-#include "ns3/random-variable.h"
+// #include "ns3/random-variable.h"
+#include "ns3/random-variable-stream.h"    //random-variable changed to random-varable-stream [ns-3.15] 
 #include "ns3/channel-emulation.h"
 #include <stdint.h>
 #include "ns3/callback.h"
