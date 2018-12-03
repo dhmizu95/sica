@@ -4,6 +4,6 @@ def build(bld):
     obj = bld.create_ns3_program('sica-example', ['sica'])
     obj.source = [
         'sica-example.cc',
-        'multi-radio-scenario.cc'
+#        'multi-radio-scenario.cc'
         ]
 
