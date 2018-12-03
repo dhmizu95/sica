@@ -15,15 +15,21 @@ NS_OBJECT_ENSURE_REGISTERED (ChannelEmu);
 
 ChannelEmu::ChannelEmu():
   m_busyDuration(MilliSeconds(8)),
-  m_nextTime(ExponentialVariable(2,8)),
+  // m_nextTime(ExponentialVariable(2,8)),
   m_state((Status)Idle_State),
   m_stausTimer(Timer::CANCEL_ON_DESTROY)
 {
-  m_stausTimer.SetDelay(MilliSeconds(static_cast<uint64_t>(m_nextTime.GetValue())));	
+  double mean = 2;
+  double bound = 8;
+  m_nextTime = CreateObject<ExponentialRandomVariable> ();
+  m_nextTime->SetAttribute ("Mean", DoubleValue (mean));
+  m_nextTime->SetAttribute ("Bound", DoubleValue (bound));
+
+  m_stausTimer.SetDelay(MilliSeconds(static_cast<uint64_t>(m_nextTime->GetValue())));	
   m_stausTimer.SetFunction(&ChannelEmu::ChangeStatus,this);
   m_stausTimer.Schedule();
   NS_LOG_INFO("Channel emulation is created with following parameter  >>");
-NS_LOG_INFO("--BusyDuration " << m_busyDuration.GetSeconds() );
+  NS_LOG_INFO("--BusyDuration " << m_busyDuration.GetSeconds() );
 }
 
 
