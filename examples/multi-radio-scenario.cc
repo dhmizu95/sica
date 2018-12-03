@@ -120,7 +120,7 @@ static void GatherInfo(const char* prType,Time delay)
     case 'r':
       {
         rxPackets++;
-        nsRxDelay+=Time::ToDouble(delay,(Time::Unit)1);
+        nsRxDelay+=Time::ToDouble(delay,(Time::Unit)5);
         break;
       }
     case 'h':
