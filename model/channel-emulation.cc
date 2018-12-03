@@ -54,12 +54,12 @@ ChannelEmu::GetTypeId (void)
     //                RandomVariableValue (ExponentialVariable(2,8)),
     //                MakeRandomVariableAccessor (&ChannelEmu::m_nextTime),
     //                MakeRandomVariableChecker ())
-    .AddAttribute ("Variable",
-                   "The random variable used to pick a idle time  everytime it is invoked.",
-                  //  StringValue ("ns3::UniformRandomVariable"),
-                   RandomVariableValue (ExponentialVariable(2,8))
-                   MakePointerAccessor (&ChannelEmu::m_nextTime),
-                   MakePointerChecker<RandomVariableStream> ())
+    // .AddAttribute ("Variable",
+    //                "The random variable used to pick a idle time  everytime it is invoked.",
+    //               //  StringValue ("ns3::UniformRandomVariable"),
+    //                RandomVariableValue (ExponentialVariable(2,8))
+    //                MakePointerAccessor (&ChannelEmu::m_nextTime),
+    //                MakePointerChecker<RandomVariableStream> ())
     .AddTraceSource ("StatusChanged", 
                    "Trace source indicating status changes",
                    MakeTraceSourceAccessor (&ChannelEmu::m_statusChanged))
