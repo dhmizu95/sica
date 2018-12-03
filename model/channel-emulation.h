@@ -24,7 +24,8 @@
 #include <vector>
 #include "ns3/header.h"
 #include "ns3/timer.h"
-#include "ns3/random-variable.h"
+// #include "ns3/random-variable.h"
+#include "ns3/random-variable-stream.h"    //random-variable changed to random-varable-stream [ns-3.15] 
 #include "ns3/double.h"
 #include "ns3/integer.h"
 #include "ns3/nstime.h"
@@ -102,7 +103,8 @@ private:
 
   uint32_t m_chId; ///< the channel number for which this emulator simulate the external interferences
   Time m_busyDuration;///< maximum amount of busy time at each iteration
-  RandomVariable m_nextTime; ///< exponential random variable for time duration between status
+  // RandomVariable m_nextTime; ///< exponential random variable for time duration between status
+  Ptr<ExponentialRandomVariable> m_nextTime; //= CreateObject<ExponentialRandomVarlable> ();
   Status m_state; ///< current status of the channel
   Timer m_stausTimer; ///< Timer to change the status of the channel
 };
