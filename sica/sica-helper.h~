@@ -1,0 +1,93 @@
+/* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
+/* 
+ * Copyright (c) 2010 Universitat Pollitechnica the Catalunya
+ * 
+ * 
+ * Author: Maryam Amiri Nezhad <maryam@ac.upc.edu>
+ * 
+ * This is doxygen module description, don't include 
+ */
+#ifndef SICAHELPER_H
+#define SICAHELPER_H
+
+/**
+ * \ingroup sica 
+ * \defgroup sicahelper SicaHelper
+ */
+
+
+#include "ns3/sica.h"
+#include "ns3/node.h"
+#include <vector>
+#include "ns3/object-factory.h"
+#include "node-container.h"
+
+namespace ns3 {
+/**
+ * \ingroup sicahelper
+ * \brief Helper class that adds Sica channel assignment  to nodes.
+ */
+
+class SicaContainer
+{
+ public:
+typedef std::vector<Ptr<Sica> >::const_iterator Iterator;
+/**
+   * Create an empty SicaContainer.
+   */
+SicaContainer ();
+Iterator Begin (void) const;
+Iterator End (void) const;
+uint32_t GetN (void) const;
+Ptr<Sica> Get (uint32_t i) const;
+void Add (Ptr<Sica> s);
+private:
+std::vector<Ptr<Sica> > m_sicaAgents;
+
+};
+
+/**
+ * \ingroup sicahelper
+ * \brief Helper class that adds Sica channel assignment  to nodes.
+ */
+class SicaHelper
+{
+public: 
+  //c_tor
+  SicaHelper();
+  /**
+   * \param node the node on which Sica will run
+   * \returns a newly-created Sica
+   *
+   * This method will be called by ns3::SicaHelper::Install
+   * 
+   */
+
+  Ptr<Sica> Create (Ptr<Node> node,ChannelEmuContainer channelsEmu ) const;
+
+/**
+   * \param name the name of the attribute to set
+   * \param value the value of the attribute to set.
+   *
+   * This method controls the attributes of ns3::Sica::Sica
+   */
+
+  void Set (std::string name, const AttributeValue &value);
+
+   /**
+   * For each node in the input container,implements 
+   * ns3::Sica  The program will assert 
+   * if this method is called on a container with a node that already has
+   * an sica  object aggregated to it.
+   * 
+   * \param c NodeContainer that holds the set of nodes on which to install the
+   * new agent.
+   */
+
+  SicaContainer  Install (NodeContainer c,ChannelEmuContainer channelsEmu ) const;
+private:
+  ObjectFactory m_agentFactory;
+};/*Sica Helper */
+
+}/*namespace ns3 */
+#endif /*SicaHelper_H*/

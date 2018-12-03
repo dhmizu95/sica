@@ -1,0 +1,26 @@
+## -*- Mode: python; py-indent-offset: 4; indent-tabs-mode: nil; coding: utf-8; -*-
+
+def build(bld):
+    obj = bld.create_ns3_module('sica', ['wifi', 'mesh'])
+    obj.source = [
+        'sica.cc',
+        'sica-queue.cc',
+        'sica-packet.cc',
+        'sica-neighbor.cc',
+        'sica-channel.cc',
+        'sica-helper.cc',
+        'channel-emulation.cc',
+        'sica-rtable.cc'
+        ]
+    headers = bld.new_task_gen('ns3header')
+    headers.module = 'sica'
+    headers.source = [
+        'sica.h',
+        'sica-queue.h',
+        'sica-packet.h',
+        'sica-neighbor.h',
+        'sica-channel.h',
+        'sica-helper.h',
+        'channel-emulation.h',
+        'sica-rtable.h'
+        ]
