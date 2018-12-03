@@ -32,6 +32,14 @@ ChannelEmu::ChannelEmu():
   NS_LOG_INFO("--BusyDuration " << m_busyDuration.GetSeconds() );
 }
 
+// Ptr<ExponentialRandomVariable>
+// ExponentialVariable (double mean, double bound)
+// {
+//   Ptr<ExponentialRandomVariable> m_nextTime = CreateObject<ExponentialRandomVariable> ();
+//   m_nextTime->SetAttribute ("Mean", DoubleValue (mean));
+//   m_nextTime->SetAttribute ("Bound", DoubleValue (bound));
+//   return m_nextTime;
+// }
 
 TypeId 
 ChannelEmu::GetTypeId (void)
@@ -39,17 +47,22 @@ ChannelEmu::GetTypeId (void)
     .SetParent<Object> ()
     .AddConstructor<ChannelEmu> ()
     .AddAttribute("BusyDuration","Busy duration for channel state default value is 8ms (channel is busy)",
-		  TimeValue(MilliSeconds(8)),
-		  MakeTimeAccessor (&ChannelEmu::m_busyDuration),
-		  MakeTimeChecker ())
-    
-    .AddAttribute ("Variable", "The random variable used to pick a idle time  everytime it is invoked.",
-                   RandomVariableValue (ExponentialVariable(2,8)),
-                   MakeRandomVariableAccessor (&ChannelEmu::m_nextTime),
-                   MakeRandomVariableChecker ())
+		               TimeValue(MilliSeconds(8)),
+		               MakeTimeAccessor (&ChannelEmu::m_busyDuration),
+		               MakeTimeChecker ())
+    // .AddAttribute ("Variable", "The random variable used to pick a idle time  everytime it is invoked.",
+    //                RandomVariableValue (ExponentialVariable(2,8)),
+    //                MakeRandomVariableAccessor (&ChannelEmu::m_nextTime),
+    //                MakeRandomVariableChecker ())
+    .AddAttribute ("Variable",
+                   "The random variable used to pick a idle time  everytime it is invoked.",
+                  //  StringValue ("ns3::UniformRandomVariable"),
+                   RandomVariableValue (ExponentialVariable(2,8))
+                   MakePointerAccessor (&ChannelEmu::m_nextTime),
+                   MakePointerChecker<RandomVariableStream> ())
     .AddTraceSource ("StatusChanged", 
-                     "Trace source indicating status changes",
-                     MakeTraceSourceAccessor (&ChannelEmu::m_statusChanged))
+                   "Trace source indicating status changes",
+                   MakeTraceSourceAccessor (&ChannelEmu::m_statusChanged))
     ;
   return tid;
 }
@@ -78,7 +91,7 @@ ChannelEmu::ChangeStatus()
   else 
     {
      m_state=ChannelEmu::Idle_State;
-     m_stausTimer.SetDelay(MilliSeconds(static_cast<uint64_t>(m_nextTime.GetValue())));
+     m_stausTimer.SetDelay(MilliSeconds(static_cast<uint64_t>(m_nextTime->GetValue())));
     }
   m_stausTimer.Schedule();
   NotifyStatusChanged ();

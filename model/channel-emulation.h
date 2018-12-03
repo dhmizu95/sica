@@ -37,6 +37,7 @@
 #include "ns3/trace-source-accessor.h"
 #include "ns3/callback.h"
 #include "ns3/traced-callback.h"
+// #include <random-variable.h>  // legacy random variable
 
 namespace ns3 {
 /**
