@@ -358,7 +358,7 @@ int main (int argc, char *argv[])
    cmd.AddValue ("BroadcastSendDelay", "maximum delay for broadcast jitter (NanoSeconds)",BroadcastSendDelay);
   cmd.AddValue ("TInterfaceSendDelay", "delay T for Sica (MilliSeconds)",TInterfaceSendDelay);
   cmd.AddValue ("SwitchingDelay","The  switching delay of interfaces (MicroSeconds) ",SwitchingDelay);
-   cmd.AddValue ("TMax", "TMax for Sica CA(MilliSeconds)",TMax);
+  cmd.AddValue ("TMax", "TMax for Sica CA(MilliSeconds)",TMax);
   
   cmd.Parse (argc, argv);
   // disable fragmentation for frames below 2200 bytes

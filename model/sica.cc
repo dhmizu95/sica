@@ -163,7 +163,7 @@ Sica::GetTypeId (void)
 		  TimeValue(MicroSeconds (10)),
 		  MakeTimeAccessor (&Sica::m_TInterfaceSendDelay),
 		  MakeTimeChecker())
-.AddAttribute("TMax","The Mazimum duration of time that  T interface stays in a channel after switching to a channel",
+    .AddAttribute("TMax","The Mazimum duration of time that  T interface stays in a channel after switching to a channel",
 		  TimeValue(MilliSeconds (1)),
 		  MakeTimeAccessor (&Sica::TMax),
 		  MakeTimeChecker())
@@ -303,7 +303,7 @@ Sica::Initialize()
   NS_LOG_INFO("--minSwitchDelay " << m_minSwitchDelay);
   NS_LOG_INFO("--maxSwitchDelay " << m_maxSwitchDelay);
   NS_LOG_INFO("--TMAX is  " << TMax);
-  NS_LOG_INFO("--SwitchingDelay " << Time::ToDouble(SwitchingDelay,(Time::Unit)1));
+  NS_LOG_INFO("--SwitchingDelay " << Time::ToDouble(SwitchingDelay,(Time::Unit)5));
 }
 
 //////////////////////InitializeQueues
